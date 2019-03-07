@@ -14,29 +14,21 @@ using namespace std;
 //	return a+b
 //end if
 
-main()
+int Fibonacci(int x)
 {
-	int n, c, first = 0, second = 1, next;
-
-	cout << "Enter the number of terms of Fibonacci series you want" << endl;
-	cin >> n;
-
-	cout << "First " << n << " terms of Fibonacci series are :- " << endl;
-
-	for (c = 0; c < n; c++)
-	{
-		if (c <= 1)
-			next = c;
-		else
-		{
-			next = first + second;
-			first = second;
-			second = next;
-		}
-		cout << next << endl;
+	if (x < 2) {
+		return x;
 	}
+	return (Fibonacci(x - 1) + Fibonacci(x - 2));
+}
 
-	return 0;
+int main ()
+{	
+	int n;
+	cout << "Print the nth Fibonacci number:" << endl;
+	cin >> n;
+	cout << " Fibonacci is: " << Fibonacci(n) << endl;
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
