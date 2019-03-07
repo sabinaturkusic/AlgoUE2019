@@ -6,6 +6,14 @@
 #include <iostream>
 using namespace std;
 
+//if n=1 or n=2 then
+//	return 1
+//else 
+//a <- recursivefibonacci(n-1)
+//b <- recursive fibonacci(n-2)
+//	return a+b
+//end if
+
 main()
 {
 	int n, c, first = 0, second = 1, next;
