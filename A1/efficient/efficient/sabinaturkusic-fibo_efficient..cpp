@@ -10,6 +10,7 @@
 
 #include "pch.h"
 #include <iostream>
+#include <chrono>
 using namespace std;
 
 int main()
@@ -37,10 +38,14 @@ int main()
 		t1 = t2;
 		t2 = nextTerm;
 
-		cout << nextTerm << " ";
+		cout << nextTerm << " " << endl;
 	}
 	return 0;
+	
 }
+
+
+
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
