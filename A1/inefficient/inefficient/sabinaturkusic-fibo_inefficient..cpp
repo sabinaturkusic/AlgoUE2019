@@ -4,6 +4,9 @@
 //time vor programm in konsole aufrufen und dann nmisst es die runtime
 #include "pch.h"
 #include <iostream>
+#include <algorithm>
+#include <string>
+#include <vector>
 using namespace std;
 
 //if n=1 or n=2 then
@@ -14,29 +17,110 @@ using namespace std;
 //	return a+b
 //end if
 
-main()
+vector<int> vectorResults;
+
+int Fibonacci(int x)
 {
-	int n, c, first = 0, second = 1, next;
+	
+	if (x < 2) {
+		return x;
+	}
+	int result = Fibonacci(x - 1) + Fibonacci(x - 2); 
 
-	cout << "Enter the number of terms of Fibonacci series you want" << endl;
-	cin >> n;
+	vectorResults.push_back(result);
 
-	cout << "First " << n << " terms of Fibonacci series are :- " << endl;
+	return result;
+}
 
-	for (c = 0; c < n; c++)
+void printHelp() {
+	cout << "Help:" << endl << "-n: print the nth Fibonacci number"
+		<< endl << "--all: print all Fibonacci numbers up to n" << endl;
+		cout << "Example: $githubusername-fibo_inefficient.$suffix -n [--all] [--help]" << endl;
+}
+
+void calcFibonnaci(int n, bool allPrint)
+{
+	Fibonacci(n); 
+	sort(vectorResults.begin(), vectorResults.end());
+	vectorResults.erase(unique(vectorResults.begin(), vectorResults.end()), vectorResults.end());
+
+	if (allPrint)
 	{
-		if (c <= 1)
-			next = c;
+		cout << "1" << endl;
+
+		for (auto const&c : vectorResults)
+		{
+			cout << c << endl;
+		}
+	}
+	else
+	{
+		int size = vectorResults.size();
+		cout << vectorResults[size - 1] << endl;
+	}
+}
+
+int main (int argc, char const *argv[])
+{	
+	if (argc <= 2)
+	{
+		//Warum? 
+		//entweder man gibt -n ohne wert an (ist blödsinn -> daher help)
+		//oder man gibt --help an, dann soll help auch anzeigt werden
+		//oder man gibt tatsächlich nur --all ein, was auch blödsinn wäre. 
+		printHelp(); 
+		return 0; 
+	}
+	if (argc > 4)
+	{
+		printHelp(); 
+		return 0; 
+	}
+	if (argc == 3)
+	{
+		string argv1 = argv[1]; 
+		if (argv1.compare("-n") == 0)
+		{
+			//nun hole ich mir die Zahl nach dem Parameter --n 
+			int argv2 = stoi(argv[2]);  //Exception handling? 
+			calcFibonnaci(argv2, false); 
+		}
 		else
 		{
-			next = first + second;
-			first = second;
-			second = next;
+			printHelp(); 
 		}
-		cout << next << endl;
+	}
+	if (argc == 4)
+	{
+		string argv1 = argv[1];
+		string argv3 = argv[3]; 
+		if (argv1.compare("-n") == 0)
+		{
+			//nun hole ich mir die Zahl nach dem Parameter --n 
+			int argv2 = stoi(argv[2]); //Exception handling?
+			if (argv3.compare("--all") == 0)
+			{
+				calcFibonnaci(argv2, true); 
+			}
+			else
+			{
+				printHelp(); 
+			}
+		}
+		else
+		{
+			printHelp();
+		}
 	}
 
-	return 0;
+	/*cout << "Print the nth Fibonacci number:" << endl;
+	cin >> n;
+	cout << " Fibonacci is: " << Fibonacci(n) << endl;*/
+
+	
+	
+	
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
