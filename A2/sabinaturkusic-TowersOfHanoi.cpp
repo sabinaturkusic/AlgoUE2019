@@ -62,7 +62,7 @@ int main(int argc, char const *argv[])
 	{
 		printHelp();
 	}
-	cout << "The sequence of moves for " << argv2 << " disks is: " << endl;
+	//cout << "The sequence of moves for " << argv2 << " disks is: " << endl;
 	towers(argv2, 'A', 'C', 'B');
 	cerr << "The sum of moves for " << argv2 << " disks is: " << counter << endl;
 	return 0;
