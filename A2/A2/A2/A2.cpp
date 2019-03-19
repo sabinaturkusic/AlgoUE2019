@@ -13,35 +13,77 @@
 //You might employ the concept of subshells to get this done.
 //Plot the runtime of your program(in seconds) vs size of the Hanoi puzzle and 
 //create a PDF graph.Your pull request should include the following files
+//STDERR: gesamtanzahl der moves
+//STDOUT: move from peg ... to peg, textausgabe
+//runtime in extra file umleiten
 
 
 #include "pch.h"
 #include <iostream>
+#include <string>
 using namespace std;
 
 void towers(int, char, char, char);
+int counter=0;
 
-int main()
+void printHelp() 
 {
-	int num;
+	cout << "Help:" << endl << "-n: print the sum of moves for n disks" << endl;
+	cout << "Example: $githubusername-TowersOfHanoi.$suffix -n [--help]" << endl;
+}
 
-	cout << "Enter the number of disks : ";
-	cin >> num;
-	cout << "The sequence of moves involved in the Tower of Hanoi are :n";
-	towers(num, 'A', 'C', 'B');
+int main(int argc, char const *argv[])
+{
+	int argv2;
+	if (argc <= 2)
+	{
+		//Warum? 
+		//entweder man gibt -n ohne wert an (ist blödsinn -> daher help)
+		//oder man gibt --help an, dann soll help auch anzeigt werden
+		//oder man gibt tatsächlich nur --all ein, was auch blödsinn wäre. 
+		printHelp();
+		return 0;
+	}
+	if (argc > 3)
+	{
+		printHelp();
+		return 0;
+	}
+	if (argc == 3)
+	{
+		string argv1 = argv[1];
+		if (argv1.compare("-n") == 0)
+		{
+			//nun hole ich mir die Zahl nach dem Parameter --n 
+			argv2 = stoi(argv[2]); //Exception handling?
+		}
+	}
+	else
+	{
+		printHelp();
+	}
+	cout << "The sequence of moves for " << argv2 << " disks is: " << endl;
+	towers(argv2, 'A', 'C', 'B');
+	cerr << "The sum of moves for " << argv2 << " disks is: " << counter << endl;
 	return 0;
 }
+
 void towers(int num, char frompeg, char topeg, char auxpeg)
 {
 	if (num == 1)
 	{
-		cout << "n Move disk 1 from peg " << frompeg << " to peg " << topeg;
+		cout << "Move disk 1 from peg " << frompeg << " to peg " << topeg << endl; //STDOUT
+		counter++;
 		return;
 	}
 	towers(num - 1, frompeg, auxpeg, topeg);
-	cout << "n Move disk " << num << " from peg " << frompeg << " to peg " << topeg;
+	cout << "Move disk " << num << " from peg " << frompeg << " to peg " << topeg << endl;
+	counter++;
 	towers(num - 1, auxpeg, topeg, frompeg);
 }
+
+
+
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
