@@ -1,6 +1,0 @@
-C:\Users\turku\source\repos\AlgoUE2019\A3\uebung3\MHTP\MHTP\MHTP\bin\Debug>.\sabinaturkusic-ManhattanTouristHV.exe < rmHV_10_19
-12.46
-
-C:\Users\turku\source\repos\AlgoUE2019\A3\uebung3\MHTP\MHTP\MHTP\bin\Debug>.\sabinaturkusic-ManhattanTouristHV.exe < rmHV_999_19
-1562.41000000001
-
